@@ -24,7 +24,7 @@ export default function Home() {
     <div>
       {" "}
       <NavBar />
-      <div className="p-3 ">
+      <div className="flex-rows p-3 gap-4 md:grid grid-cols-2">
         {session.map((data) => (
           <SessionList session={data} />
         ))}
