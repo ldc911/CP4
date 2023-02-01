@@ -2,6 +2,8 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+// eslint-disable-next-line import/no-extraneous-dependencies
+const morgan = require("morgan");
 
 // create express app
 
@@ -12,12 +14,13 @@ const app = express();
 // use some application-level middlewares
 
 app.use(express.json());
+app.use(morgan("tiny"));
 
 const cors = require("cors");
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+    origin: process.env.FRONTEND_URL ?? "http://localhost:5173",
     optionsSuccessStatus: 200,
   })
 );
