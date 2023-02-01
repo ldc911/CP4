@@ -1,36 +1,34 @@
-import Counter from "../components/Counter";
-import logo from "../assets/logo.svg";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import NavBar from "../components/NavBar";
+import SessionList from "../components/SessionList";
 
 export default function Home() {
-  return (
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>Hello Vite + React !</p>
+  const [session, setSession] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_URL}/sessions`)
+      .then((response) => {
+        setIsLoading(false);
+        setSession(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-      <Counter />
-
-      <p>
-        Edit <code>App.jsx</code> and save to test HMR updates.
-      </p>
-      <p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        {" | "}
-        <a
-          className="App-link"
-          href="https://vitejs.dev/guide/features.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Vite Docs
-        </a>
-      </p>
-    </header>
+  return isLoading ? (
+    <p>loading</p>
+  ) : (
+    <div>
+      {" "}
+      <NavBar />
+      <div className="p-3 ">
+        {session.map((data) => (
+          <SessionList session={data} />
+        ))}
+      </div>
+    </div>
   );
 }
