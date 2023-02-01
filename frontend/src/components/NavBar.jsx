@@ -5,21 +5,27 @@ import { Bars2Icon } from "@heroicons/react/24/outline";
 
 export default function NavBar() {
   return (
-    <Popover className="relative m-4">
-      <Popover.Button>
-        <Bars2Icon className="h-8 h-8 text-red-700" />
-      </Popover.Button>
+    <div className="w-full h-10 md:bg-red-800 ">
+      <div className="hidden md:h-full md:text-white md:flex flex-row items-center justify-center gap-12">
+        <div className="hover:font-semibold">Profils</div>
+        <div className="hover:font-semibold">Créer une session</div>
+      </div>
+      <Popover className="relative p-3 md:hidden">
+        <Popover.Button>
+          <Bars2Icon className="w-14 h-10 text-red-700" />
+        </Popover.Button>
 
-      <Popover.Panel className="absolute z-10">
-        <div className="flex flex-col bg-white rounded-md shadow-md px-1">
-          <a href="/analytics" className=" hover:font-semibold">
-            Créer une session
-          </a>
-          <a href="/engagement" className=" hover:font-semibold">
-            Profils
-          </a>
-        </div>
-      </Popover.Panel>
-    </Popover>
+        <Popover.Panel className="absolute z-10">
+          <div className="flex flex-col bg-white rounded-md shadow-md px-1">
+            <a href="/analytics" className=" hover:font-semibold">
+              Créer une session
+            </a>
+            <a href="/engagement" className=" hover:font-semibold">
+              Profils
+            </a>
+          </div>
+        </Popover.Panel>
+      </Popover>
+    </div>
   );
 }
