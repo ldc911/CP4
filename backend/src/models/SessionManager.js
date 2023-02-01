@@ -56,13 +56,14 @@ class SessionManager extends AbstractManager {
 
   getFullSession() {
     return this.database
-      .query(`SELECT s.dateSession, s.duration, s.localisation, s.isCampaign, s.title, u.nickname AS mealDealer, s.details_meals, u2.nickname AS aperoDealer, u3.nickname AS alcoolDealer, u4.nickname AS sweetsDealer, u5.nickname AS dessertDealer, u6.nickname AS softDealer FROM ${this.table} AS s
+      .query(`SELECT s.id, s.dateSession, s.duration, s.localisation, s.isCampaign, s.title, u.nickname AS mealDealer, s.details_meals, u2.nickname AS aperoDealer, u3.nickname AS alcoolDealer, u4.nickname AS sweetsDealer, u5.nickname AS dessertDealer, u6.nickname AS softDealer FROM ${this.table} AS s
     INNER JOIN user AS u ON s.user_meal = u.id
     INNER JOIN user AS u2 ON s.user_apero = u2.id
     INNER JOIN user AS u3 ON s.user_alcool = u3.id
     INNER JOIN user AS u4 ON s.user_sweets = u4.id
     INNER JOIN user AS u5 ON s.user_dessert = u5.id
     INNER JOIN user AS u6 ON s.user_soft = u6.id
+    ORDER BY s.dateSession ASC
     `);
   }
 

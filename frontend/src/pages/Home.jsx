@@ -17,18 +17,25 @@ export default function Home() {
         console.error(err);
       });
   }, []);
-
+  const today = new Date();
   return isLoading ? (
     <p>loading</p>
   ) : (
     <div>
       {" "}
       <NavBar />
-      <div className="flex-rows p-3 gap-4 md:grid grid-cols-2">
-        {session.map((data) => (
-          <SessionList session={data} />
-        ))}
-      </div>
+      <ul className="flex-rows p-3 gap-4 md:grid grid-cols-2">
+        {session
+          .filter((element) => {
+            const date = new Date(element.dateSession); // filtre pour ne pas montrer les sessions passées
+            return date >= today;
+          })
+          .map((data, index) => (
+            <li key={data.id}>
+              <SessionList session={data} index={index} />
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }

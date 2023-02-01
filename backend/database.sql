@@ -81,7 +81,7 @@ INSERT INTO
         user_soft
     )
 VALUES (
-        "2023-O2-04",
+        '2023-02-04',
         "Après-midi",
         "Chez Naälia",
         1,
@@ -94,7 +94,7 @@ VALUES (
         3,
         5
     ), (
-        "2023-O2-11",
+        '2023-02-11',
         "Après-midi et soirée",
         "Chez Hassess",
         0,
