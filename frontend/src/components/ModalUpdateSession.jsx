@@ -7,6 +7,8 @@ import UpdateSessionFull from "./UpdateSessionFull";
 function ModalUpdateSession({
   openModalUpdateSession,
   setOpenModalUpdateSession,
+  sessionUpdate,
+  setSessionUpdate,
   data,
 }) {
   const cancelButtonRef = useRef(null);
@@ -53,6 +55,8 @@ function ModalUpdateSession({
                 <UpdateSessionFull
                   data={data}
                   setOpenModalUpdateSession={setOpenModalUpdateSession}
+                  sessionUpdate={sessionUpdate}
+                  setSessionUpdate={setSessionUpdate}
                 />
               </div>
               <div className="mt-6 flex justify-end">

@@ -14,6 +14,8 @@ export default function SessionList({
   query,
   sessionDelete,
   setSessionDelete,
+  sessionUpdate,
+  setSessionUpdate,
 }) {
   const {
     title,
@@ -48,6 +50,8 @@ export default function SessionList({
       <ModalUpdateSession
         openModalUpdateSession={openModalUpdateSession}
         setOpenModalUpdateSession={setOpenModalUpdateSession}
+        sessionUpdate={sessionUpdate}
+        setSessionUpdate={setSessionUpdate}
         data={session}
       />
       <div className="grid grid-cols-3 items-center">
@@ -84,7 +88,7 @@ export default function SessionList({
           </div>
           <div className="text-center">{duration}</div>
           <div className="text-center">
-            {isCampaign ? "CAMPAGNE" : "SIDE QUESTS"}
+            {isCampaign === "1" ? "CAMPAGNE" : "SIDE QUESTS"}
           </div>
         </div>
       </div>

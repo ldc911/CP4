@@ -9,7 +9,6 @@ export default function Home() {
   const [session, setSession] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [sessionDelete, setSessionDelete] = useState(true);
-  const [sessionUpdate, setSessionUpdate] = useState(true);
   const location = useLocation();
   const queryString = location.search;
   useEffect(() => {
@@ -22,7 +21,7 @@ export default function Home() {
       .catch((err) => {
         console.error(err);
       });
-  }, [sessionDelete, sessionUpdate]);
+  }, [sessionDelete]);
   const today = new Date();
   const dateTransform = (oneDate) => {
     const date = new Date(oneDate);
@@ -46,8 +45,6 @@ export default function Home() {
                   query={queryString}
                   sessionDelete={sessionDelete}
                   setSessionDelete={setSessionDelete}
-                  sessionUpdate={sessionUpdate}
-                  setSessionUpdate={setSessionUpdate}
                   index={index}
                 />
               </li>

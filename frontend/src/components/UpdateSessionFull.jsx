@@ -4,7 +4,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Switch } from "@headlessui/react";
 import SelectMenuDurationUpdate from "./selects/SelectMenuDurationUpdate";
 import SelectMenuUpdate from "./selects/SelectMenuUpdate";
@@ -18,8 +17,15 @@ const duration = [
   { id: 4, value: "Week-end" },
 ];
 
-export default function UpdateFullSession({ data, setOpenModalUpdateSession }) {
-  const [isCampaignEnabled, setIsCampaignEnabled] = useState(data.isCampaign);
+export default function UpdateFullSession({
+  data,
+  setOpenModalUpdateSession,
+  sessionUpdate,
+  setSessionUpdate,
+}) {
+  const [isCampaignEnabled, setIsCampaignEnabled] = useState(
+    parseInt(data.isCampaign, 10)
+  );
   const [placeHolderMeal, setPlaceHolderMeal] = useState(
     data.mealDealer || "Qui régale ?"
   );
@@ -65,8 +71,6 @@ export default function UpdateFullSession({ data, setOpenModalUpdateSession }) {
         console.error(err);
       });
   }, []);
-
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSessionInfo({ ...sessionInfo, title: event.target.value });
@@ -122,7 +126,7 @@ export default function UpdateFullSession({ data, setOpenModalUpdateSession }) {
         {
           duration: sessionInfo.duration,
           localisation: sessionInfo.localisation,
-          isCampaign: isCampaignEnabled ? 1 : 0,
+          isCampaign: isCampaignEnabled ? "1" : "0",
           title: sessionInfo.title,
           user_meal: sessionInfo.user_meal,
           details_meals: sessionInfo.details_meals,
@@ -139,7 +143,7 @@ export default function UpdateFullSession({ data, setOpenModalUpdateSession }) {
         }
       )
       .then(function handleResponse() {
-        navigate("/");
+        setSessionUpdate(!sessionUpdate);
         setOpenModalUpdateSession(false);
       });
   };
