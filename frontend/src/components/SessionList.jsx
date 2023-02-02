@@ -1,7 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
+
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import ModalUpdateSession from "./ModalUpdateSession";
+
 import DeleteSession from "./DeleteSession";
 
 export default function SessionList({
@@ -25,6 +29,9 @@ export default function SessionList({
     dessertDealer,
     softDealer,
   } = session;
+
+  const [openModalUpdateSession, setOpenModalUpdateSession] = useState(false);
+
   function getMonthName(date) {
     const birthdayMonth = new Date(date).getMonth();
     const newDate = new Date();
@@ -34,8 +41,17 @@ export default function SessionList({
   }
   const getDay = new Date(dateSession).getDate();
 
+  const handleClick = () => {
+    setOpenModalUpdateSession(true);
+  };
+
   return (
     <div className=" w-full bg-white rounded-md p-2 mb-4 shadow text-xs md:text-base ">
+      <ModalUpdateSession
+        openModalUpdateSession={openModalUpdateSession}
+        setOpenModalUpdateSession={setOpenModalUpdateSession}
+        data={session}
+      />
       <div className="grid grid-cols-3 items-center">
         <div>
           {index === 0 && (
@@ -58,6 +74,9 @@ export default function SessionList({
 
         <div>
           <div className="flex flex-row justify-end">
+            <button type="button" onClick={handleClick}>
+              <PencilSquareIcon className="text-red-700 hover:text-red-900  w-4 h-4  cursor-pointer" />
+            </button>
             <DeleteSession
               data={session}
               sessionDelete={sessionDelete}

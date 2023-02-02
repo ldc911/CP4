@@ -31,7 +31,7 @@ export default function Home() {
   return isLoading ? (
     <p>loading</p>
   ) : (
-    <div>
+    <div className="h-full flex flex-col">
       <div className=" flex flex-col gap-4 p-3 md:grid md:grid-cols-2">
         <ul>
           {session

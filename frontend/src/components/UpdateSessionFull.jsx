@@ -1,16 +1,13 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/prop-types */
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
 import { useNavigate } from "react-router-dom";
 import { Switch } from "@headlessui/react";
-import SelectMenuDuration from "../components/selects/SelectMenuDuration";
-import SelectMenu from "../components/selects/SelectMenuUpdate";
+import SelectMenuDurationUpdate from "./selects/SelectMenuDurationUpdate";
+import SelectMenuUpdate from "./selects/SelectMenuUpdate";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -21,28 +18,25 @@ const duration = [
   { id: 4, value: "Week-end" },
 ];
 
-export default function CreateSession() {
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedDuration, setSelectedDuration] = useState(duration[0].value);
-  const [selectedCampaign, setSelectedCampaign] = useState(false);
-  const [title, setTitle] = useState("");
-  const [location, setLocation] = useState("");
+export default function UpdateFullSession({ data }) {
+  const [isCampaignEnabled, setIsCampaignEnabled] = useState(data.isCampaign);
+  const [title, setTitle] = useState(data.title);
+  const [location, setLocation] = useState(data.localisation);
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState("");
-  const [mealDealer, setMealDealer] = useState(null);
-  const [mealDealerName, setMealDealerName] = useState("Qui régale ?");
-  const [menu, setMenu] = useState("");
-  const [sweetDealer, setSweetDealer] = useState(null);
-  const [sweetDealerName, setSweetDealerName] = useState("Qui régale ?");
-  const [aperoDealer, setAperoDealer] = useState(null);
-  const [aperoDealerName, setAperoDealerName] = useState("Qui régale ?");
-  const [dessertDealer, setDessertDealer] = useState(null);
-  const [dessertDealerName, setDessertDealerName] = useState("Qui régale ?");
-  const [softDealer, setSoftDealer] = useState(null);
-  const [softDealerName, setSoftDealerName] = useState("Qui régale ?");
-  const [alcoolDealer, setAlcoolDealer] = useState(null);
-  const [alcoolDealerName, setAlcoolDealerName] = useState("Qui régale ?");
-  const navigate = useNavigate();
+  const [sessionInfo, setSessionInfo] = useState({
+    duration: data.duration,
+    localisation: data.localisation,
+    isCampaign: data.isCampaign,
+    title: data.title,
+    user_meal: data.user_meal,
+    details_meals: data.details_meals,
+    user_apero: data.user_apero,
+    user_alcool: data.user_alcool,
+    user_sweets: data.user_sweets,
+    user_dessert: data.user_dessert,
+    user_soft: data.user_soft,
+  });
 
   useEffect(() => {
     axios
@@ -56,20 +50,70 @@ export default function CreateSession() {
       });
   }, []);
 
+  const [mealDealer, setMealDealer] = useState(data.user_meal);
+  const [mealDealerName, setMealDealerName] = useState(
+    users &&
+      users.map((e) => {
+        e.id === data.user_meal;
+        return e.nickname;
+      })
+  );
+  const [menu, setMenu] = useState(data.details_meals);
+  const [sweetDealer, setSweetDealer] = useState(data.user_sweets);
+  const [sweetDealerName, setSweetDealerName] = useState(
+    users &&
+      users.map((e) => {
+        e.id === data.user_sweets;
+        return e.nickname;
+      })
+  );
+  const [aperoDealer, setAperoDealer] = useState(data.user_apero);
+  const [aperoDealerName, setAperoDealerName] = useState(
+    users &&
+      users.map((e) => {
+        e.id === data.user_apero;
+        return e.nickname;
+      })
+  );
+  const [dessertDealer, setDessertDealer] = useState(data.user_dessert);
+  const [dessertDealerName, setDessertDealerName] = useState(
+    users &&
+      users.map((e) => {
+        e.id === data.user_dessert;
+        return e.nickname;
+      })
+  );
+  const [softDealer, setSoftDealer] = useState(data.user_soft);
+  const [softDealerName, setSoftDealerName] = useState(
+    users &&
+      users.map((e) => {
+        e.id === data.user_soft;
+        return e.nickname;
+      })
+  );
+  const [alcoolDealer, setAlcoolDealer] = useState(data.user_alcool);
+  const [alcoolDealerName, setAlcoolDealerName] = useState(
+    users &&
+      users.map((e) => {
+        e.id === data.user_alcool;
+        return e.nickname;
+      })
+  );
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
-    setTitle(event.target.value);
+    setSessionInfo({ ...sessionInfo, title: event.target.value });
   };
   const handleChangeLocation = (event) => {
-    setLocation(event.target.value);
+    setSessionInfo({ ...sessionInfo, localisation: event.target.value });
   };
   const handleChangeMenu = (event) => {
-    setMenu(event.target.value);
+    setSessionInfo({ ...sessionInfo, details_meals: event.target.value });
   };
 
-  let footer = <p>Sélectionne une date.</p>;
-  if (selectedDate) {
-    footer = <p>Date sélectionnée : {format(selectedDate, "PP")}</p>;
-  }
+  const handleMeal = (event) => {
+    setSessionInfo({ ...sessionInfo, user_meal: event });
+  };
 
   useEffect(() => {
     if (mealDealer) {
@@ -116,12 +160,13 @@ export default function CreateSession() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let isCampaign;
+    // eslint-disable-next-line no-undef
     selectedCampaign === true ? (isCampaign = 1) : (isCampaign = 0);
     axios
       .post(
         `${VITE_BACKEND_URL}/sessions`,
         {
-          dateSession: selectedDate,
+          // eslint-disable-next-line no-undef
           duration: selectedDuration,
           localisation: location,
           isCampaign,
@@ -144,27 +189,22 @@ export default function CreateSession() {
         navigate("/");
       });
   };
+
+  // eslint-disable-next-line no-restricted-syntax
+  console.log(sessionInfo);
   return isLoading ? (
     <p>loading</p>
   ) : (
     <form onSubmit={handleSubmit}>
       <div className=" w-full h-full bg-white rounded-md py-6 px-2 m-4 shadow text-xs md:text-xl flex flex-col items-center">
-        <div className=" rounded-md shadow pb4 mb-4 h-fit w-fit">
-          <DayPicker
-            mode="single"
-            selected={selectedDate}
-            onSelect={setSelectedDate}
-            footer={footer}
-            locale={fr}
-          />
-        </div>
         <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
           <div className="text-center">Combien de temps ?</div>
           <div className="w-1/2 leading-4">
-            <SelectMenuDuration
+            <SelectMenuDurationUpdate
               duration={duration}
-              selectedDuration={selectedDuration}
-              setSelectedDuration={setSelectedDuration}
+              sessionInfo={sessionInfo}
+              selectedDuration={sessionInfo.duration}
+              setSessionInfo={setSessionInfo}
             />
           </div>
         </div>
@@ -172,18 +212,24 @@ export default function CreateSession() {
           <div className="text-center">Sera-ce une campagne ?</div>
           <div className="py-16">
             <Switch
-              checked={selectedCampaign}
-              onChange={setSelectedCampaign}
-              className={`${selectedCampaign ? "bg-green-900" : "bg-red-900"}
-          relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+              checked={isCampaignEnabled}
+              onChange={() => {
+                if (!isCampaignEnabled) {
+                  setIsCampaignEnabled(!isCampaignEnabled);
+                } else {
+                  setIsCampaignEnabled(false);
+                }
+              }}
+              className={`${isCampaignEnabled ? "bg-green-900" : "bg-red-900"}
+      relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
               <span className="sr-only">Use setting</span>
               <span
                 aria-hidden="true"
                 className={`${
-                  selectedCampaign ? "translate-x-9" : "translate-x-0"
+                  isCampaignEnabled ? "translate-x-9" : "translate-x-0"
                 }
-            pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+        pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
               />
             </Switch>
           </div>
@@ -193,7 +239,7 @@ export default function CreateSession() {
           <div className="shadow-md leading-8">
             <input
               type="text"
-              value={title}
+              value={sessionInfo.title}
               onChange={handleChange}
               placeholder="Entre le titre de la session"
             />
@@ -204,7 +250,7 @@ export default function CreateSession() {
           <div className="shadow-md leading-8">
             <input
               type="text"
-              value={location}
+              value={sessionInfo.localisation}
               onChange={handleChangeLocation}
               placeholder="Entre le lieu de la session"
             />
@@ -213,9 +259,11 @@ export default function CreateSession() {
         <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
           <div>Gestion du repas</div>
           <div className="w-1/2 leading-4">
-            <SelectMenu
+            <SelectMenuUpdate
+              sessionInfo={sessionInfo}
+              selectedDuration={sessionInfo.duration}
+              handleMeal={handleMeal}
               data={users}
-              setSelectedElement={setMealDealer}
               placeHolder={mealDealerName}
             />
           </div>
@@ -225,7 +273,7 @@ export default function CreateSession() {
           <div className="shadow-md leading-8">
             <input
               type="text"
-              value={menu}
+              value={sessionInfo.details_meals}
               onChange={handleChangeMenu}
               placeholder="On mange quoi ?"
             />
@@ -234,7 +282,7 @@ export default function CreateSession() {
         <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
           <div>Le dessert :</div>
           <div className="w-1/2 leading-4">
-            <SelectMenu
+            <SelectMenuUpdate
               data={users}
               setSelectedElement={setDessertDealer}
               placeHolder={dessertDealerName}
@@ -244,7 +292,7 @@ export default function CreateSession() {
         <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
           <div>L'apéro :</div>
           <div className="w-1/2 leading-4">
-            <SelectMenu
+            <SelectMenuUpdate
               data={users}
               setSelectedElement={setAperoDealer}
               placeHolder={aperoDealerName}
@@ -254,7 +302,7 @@ export default function CreateSession() {
         <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
           <div>Le sucré :</div>
           <div className="w-1/2 leading-4">
-            <SelectMenu
+            <SelectMenuUpdate
               data={users}
               setSelectedElement={setSweetDealer}
               placeHolder={sweetDealerName}
@@ -264,7 +312,7 @@ export default function CreateSession() {
         <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
           <div>Le sans alcool :</div>
           <div className="w-1/2 leading-4">
-            <SelectMenu
+            <SelectMenuUpdate
               data={users}
               setSelectedElement={setSoftDealer}
               placeHolder={softDealerName}
@@ -274,7 +322,7 @@ export default function CreateSession() {
         <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center mb-3">
           <div>La bière et le vin :</div>
           <div className="w-1/2 leading-4">
-            <SelectMenu
+            <SelectMenuUpdate
               data={users}
               setSelectedElement={setAlcoolDealer}
               placeHolder={alcoolDealerName}
