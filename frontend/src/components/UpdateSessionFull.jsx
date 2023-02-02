@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Switch } from "@headlessui/react";
 import SelectMenuDurationUpdate from "./selects/SelectMenuDurationUpdate";
-import SelectMenuUpdate from "./selects/SelectMenuUpdate";
+import SelectMenuUpdate from "./selects/SelectMenu";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 

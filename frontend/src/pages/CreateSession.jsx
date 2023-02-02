@@ -10,7 +10,7 @@ import "react-day-picker/dist/style.css";
 import { useNavigate } from "react-router-dom";
 import { Switch } from "@headlessui/react";
 import SelectMenuDuration from "../components/selects/SelectMenuDuration";
-import SelectMenu from "../components/selects/SelectMenuUpdate";
+import SelectMenu from "../components/selects/SelectMenu";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
