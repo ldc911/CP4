@@ -51,7 +51,7 @@ VALUES (
 CREATE TABLE
     session (
         id int(11) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-        dateSession VARCHAR(15) NOT NULL UNIQUE,
+        dateSession VARCHAR(255) NOT NULL UNIQUE,
         duration VARCHAR(50) NOT NULL,
         localisation VARCHAR(255) NOT NULL,
         isCampaign TINYINT(1) NOT NULL,

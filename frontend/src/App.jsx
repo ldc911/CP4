@@ -11,9 +11,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<NavBar />} />
-        <Route path="" element={<Home />} />
-        <Route path="create" element={<CreateSession />} />
+        <Route path="/" element={<NavBar />}>
+          <Route path="" element={<Home />} />
+          <Route path="create" element={<CreateSession />} />
+        </Route>
       </Routes>
     </Router>
   );

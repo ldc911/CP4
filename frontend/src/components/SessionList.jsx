@@ -2,8 +2,15 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 import React from "react";
+import DeleteSession from "./DeleteSession";
 
-export default function SessionList({ session, index }) {
+export default function SessionList({
+  session,
+  index,
+  query,
+  sessionDelete,
+  setSessionDelete,
+}) {
   const {
     title,
     dateSession,
@@ -18,7 +25,6 @@ export default function SessionList({ session, index }) {
     dessertDealer,
     softDealer,
   } = session;
-
   function getMonthName(date) {
     const birthdayMonth = new Date(date).getMonth();
     const newDate = new Date();
@@ -29,7 +35,7 @@ export default function SessionList({ session, index }) {
   const getDay = new Date(dateSession).getDate();
 
   return (
-    <div className=" w-full bg-white rounded-md p-2 mb-4 shadow text-xs md:text-base md:w-1/2">
+    <div className=" w-full bg-white rounded-md p-2 mb-4 shadow text-xs md:text-base ">
       <div className="grid grid-cols-3 items-center">
         <div>
           {index === 0 && (
@@ -40,7 +46,7 @@ export default function SessionList({ session, index }) {
           <div className="text-center">{title}</div>
         </div>
 
-        <div className="  w-1/2 h-20 overflow-hidden flex flex-col items-center rounded-md shadow">
+        <div className="w-1/2 mx-auto h-20 overflow-hidden flex flex-col items-center rounded-md shadow">
           <span className="h-1/3 w-full bg-red-800" />
           <div className="h-full flex flex-col items-center justify-evenly pb-2">
             <div className=" text-xl font-semibold">{getDay}</div>
@@ -51,6 +57,14 @@ export default function SessionList({ session, index }) {
         </div>
 
         <div>
+          <div className="flex flex-row justify-end">
+            <DeleteSession
+              data={session}
+              sessionDelete={sessionDelete}
+              setSessionDelete={setSessionDelete}
+              query={query}
+            />
+          </div>
           <div className="text-center">{duration}</div>
           <div className="text-center">
             {isCampaign ? "CAMPAGNE" : "SIDE QUESTS"}

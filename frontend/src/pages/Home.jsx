@@ -1,11 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 import SessionList from "../components/SessionList";
 import RandomSpell from "../components/RandomSpell";
 
 export default function Home() {
   const [session, setSession] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [sessionDelete, setSessionDelete] = useState(true);
+  const location = useLocation();
+  const queryString = location.search;
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/sessions`)
@@ -16,26 +21,36 @@ export default function Home() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [sessionDelete]);
   const today = new Date();
+  const dateTransform = (oneDate) => {
+    const date = new Date(oneDate);
+    return date;
+  };
+
   return isLoading ? (
     <p>loading</p>
   ) : (
     <div>
-      <div className=" flex flex-col p-3 md:grid md:grid-cols-2">
+      <div className=" flex flex-col gap-4 p-3 md:grid md:grid-cols-2">
         <ul>
           {session
             .filter((element) => {
-              const date = new Date(element.dateSession); // filtre pour ne pas montrer les sessions passées
-              return date >= today;
+              return dateTransform(element.dateSession) >= today;
             })
             .map((data, index) => (
               <li key={data.id}>
-                <SessionList session={data} index={index} />
+                <SessionList
+                  session={data}
+                  query={queryString}
+                  sessionDelete={sessionDelete}
+                  setSessionDelete={setSessionDelete}
+                  index={index}
+                />
               </li>
             ))}
         </ul>
-        <div>
+        <div className="hidden md:block">
           <RandomSpell />
         </div>
       </div>
