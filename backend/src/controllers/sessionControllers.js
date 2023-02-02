@@ -31,7 +31,6 @@ const getOneSession = (req, res) => {
 const updateSession = (req, res) => {
   const session = req.body;
   session.id = parseInt(req.params.id, 10);
-
   models.session
     .update(session)
     .then(([result]) => {

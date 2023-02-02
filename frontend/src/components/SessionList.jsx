@@ -29,9 +29,7 @@ export default function SessionList({
     dessertDealer,
     softDealer,
   } = session;
-
   const [openModalUpdateSession, setOpenModalUpdateSession] = useState(false);
-
   function getMonthName(date) {
     const birthdayMonth = new Date(date).getMonth();
     const newDate = new Date();

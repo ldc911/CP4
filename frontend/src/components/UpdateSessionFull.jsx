@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Switch } from "@headlessui/react";
 import SelectMenuDurationUpdate from "./selects/SelectMenuDurationUpdate";
-import SelectMenuUpdate from "./selects/SelectMenu";
+import SelectMenuUpdate from "./selects/SelectMenuUpdate";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -18,24 +18,40 @@ const duration = [
   { id: 4, value: "Week-end" },
 ];
 
-export default function UpdateFullSession({ data }) {
+export default function UpdateFullSession({ data, setOpenModalUpdateSession }) {
   const [isCampaignEnabled, setIsCampaignEnabled] = useState(data.isCampaign);
-  const [title, setTitle] = useState(data.title);
-  const [location, setLocation] = useState(data.localisation);
+  const [placeHolderMeal, setPlaceHolderMeal] = useState(
+    data.mealDealer || "Qui régale ?"
+  );
+  const [placeHolderApero, setPlaceHolderApero] = useState(
+    data.aperoDealer || "Qui régale ?"
+  );
+  const [placeHolderDessert, setPlaceHolderDessert] = useState(
+    data.dessertDealer || "Qui régale ?"
+  );
+  const [placeHolderAlcool, setPlaceHolderAlcool] = useState(
+    data.alcoolDealer || "Qui régale ?"
+  );
+  const [placeHolderSweet, setPlaceHolderSweet] = useState(
+    data.sweetsDealer || "Qui régale ?"
+  );
+  const [placeHolderSoft, setPlaceHolderSoft] = useState(
+    data.softDealer || "Qui régale ?"
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState("");
   const [sessionInfo, setSessionInfo] = useState({
-    duration: data.duration,
-    localisation: data.localisation,
-    isCampaign: data.isCampaign,
-    title: data.title,
-    user_meal: data.user_meal,
-    details_meals: data.details_meals,
-    user_apero: data.user_apero,
-    user_alcool: data.user_alcool,
-    user_sweets: data.user_sweets,
-    user_dessert: data.user_dessert,
-    user_soft: data.user_soft,
+    duration: data.duration || null,
+    localisation: data.localisation || null,
+    isCampaign: data.isCampaign || null,
+    title: data.title || null,
+    user_meal: data.user_meal || null,
+    details_meals: data.details_meals || null,
+    user_apero: data.user_apero || null,
+    user_alcool: data.user_alcool || null,
+    user_sweets: data.user_sweets || null,
+    user_dessert: data.user_dessert || null,
+    user_soft: data.user_soft || null,
   });
 
   useEffect(() => {
@@ -50,55 +66,6 @@ export default function UpdateFullSession({ data }) {
       });
   }, []);
 
-  const [mealDealer, setMealDealer] = useState(data.user_meal);
-  const [mealDealerName, setMealDealerName] = useState(
-    users &&
-      users.map((e) => {
-        e.id === data.user_meal;
-        return e.nickname;
-      })
-  );
-  const [menu, setMenu] = useState(data.details_meals);
-  const [sweetDealer, setSweetDealer] = useState(data.user_sweets);
-  const [sweetDealerName, setSweetDealerName] = useState(
-    users &&
-      users.map((e) => {
-        e.id === data.user_sweets;
-        return e.nickname;
-      })
-  );
-  const [aperoDealer, setAperoDealer] = useState(data.user_apero);
-  const [aperoDealerName, setAperoDealerName] = useState(
-    users &&
-      users.map((e) => {
-        e.id === data.user_apero;
-        return e.nickname;
-      })
-  );
-  const [dessertDealer, setDessertDealer] = useState(data.user_dessert);
-  const [dessertDealerName, setDessertDealerName] = useState(
-    users &&
-      users.map((e) => {
-        e.id === data.user_dessert;
-        return e.nickname;
-      })
-  );
-  const [softDealer, setSoftDealer] = useState(data.user_soft);
-  const [softDealerName, setSoftDealerName] = useState(
-    users &&
-      users.map((e) => {
-        e.id === data.user_soft;
-        return e.nickname;
-      })
-  );
-  const [alcoolDealer, setAlcoolDealer] = useState(data.user_alcool);
-  const [alcoolDealerName, setAlcoolDealerName] = useState(
-    users &&
-      users.map((e) => {
-        e.id === data.user_alcool;
-        return e.nickname;
-      })
-  );
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -112,72 +79,58 @@ export default function UpdateFullSession({ data }) {
   };
 
   const handleMeal = (event) => {
+    const dealerMeal = users.filter((e) => e.id === event);
     setSessionInfo({ ...sessionInfo, user_meal: event });
+    setPlaceHolderMeal(dealerMeal[0].nickname);
   };
 
-  useEffect(() => {
-    if (mealDealer) {
-      const userMeal = users.filter((user) => user.id === mealDealer);
-      setMealDealerName(userMeal[0].nickname);
-    }
-  }, [mealDealer]);
+  const handleDessert = (event) => {
+    const dealerDessert = users.filter((e) => e.id === event);
+    setPlaceHolderDessert(dealerDessert[0].nickname);
+    setSessionInfo({ ...sessionInfo, user_dessert: event });
+  };
 
-  useEffect(() => {
-    if (sweetDealer) {
-      const userSweet = users.filter((user) => user.id === sweetDealer);
-      setSweetDealerName(userSweet[0].nickname);
-    }
-  }, [sweetDealer]);
+  const handleApero = (event) => {
+    const dealerApero = users.filter((e) => e.id === event);
+    setPlaceHolderApero(dealerApero[0].nickname);
+    setSessionInfo({ ...sessionInfo, user_apero: event });
+  };
 
-  useEffect(() => {
-    if (aperoDealer) {
-      const userApero = users.filter((user) => user.id === aperoDealer);
-      setAperoDealerName(userApero[0].nickname);
-    }
-  }, [aperoDealer]);
+  const handleSweet = (event) => {
+    const dealerSweet = users.filter((e) => e.id === event);
+    setPlaceHolderSweet(dealerSweet[0].nickname);
+    setSessionInfo({ ...sessionInfo, user_sweets: event });
+  };
 
-  useEffect(() => {
-    if (dessertDealer) {
-      const userDessert = users.filter((user) => user.id === dessertDealer);
-      setDessertDealerName(userDessert[0].nickname);
-    }
-  }, [dessertDealer]);
+  const handleSoft = (event) => {
+    const dealerSoft = users.filter((e) => e.id === event);
+    setPlaceHolderSoft(dealerSoft[0].nickname);
+    setSessionInfo({ ...sessionInfo, user_soft: event });
+  };
 
-  useEffect(() => {
-    if (softDealer) {
-      const userSoft = users.filter((user) => user.id === softDealer);
-      setSoftDealerName(userSoft[0].nickname);
-    }
-  }, [softDealer]);
-
-  useEffect(() => {
-    if (alcoolDealer) {
-      const userAlcool = users.filter((user) => user.id === alcoolDealer);
-      setAlcoolDealerName(userAlcool[0].nickname);
-    }
-  }, [alcoolDealer]);
+  const handleAlcool = (event) => {
+    const dealerAlcool = users.filter((e) => e.id === event);
+    setPlaceHolderAlcool(dealerAlcool[0].nickname);
+    setSessionInfo({ ...sessionInfo, user_alcool: event });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let isCampaign;
-    // eslint-disable-next-line no-undef
-    selectedCampaign === true ? (isCampaign = 1) : (isCampaign = 0);
     axios
-      .post(
-        `${VITE_BACKEND_URL}/sessions`,
+      .put(
+        `${VITE_BACKEND_URL}/sessions/${data.id}`,
         {
-          // eslint-disable-next-line no-undef
-          duration: selectedDuration,
-          localisation: location,
-          isCampaign,
-          title,
-          user_meal: mealDealer,
-          details_meals: menu,
-          user_apero: aperoDealer,
-          user_alcool: alcoolDealer,
-          user_sweets: sweetDealer,
-          user_dessert: dessertDealer,
-          user_soft: softDealer,
+          duration: sessionInfo.duration,
+          localisation: sessionInfo.localisation,
+          isCampaign: isCampaignEnabled ? 1 : 0,
+          title: sessionInfo.title,
+          user_meal: sessionInfo.user_meal,
+          details_meals: sessionInfo.details_meals,
+          user_apero: sessionInfo.user_apero,
+          user_alcool: sessionInfo.user_alcool,
+          user_sweets: sessionInfo.user_sweets,
+          user_dessert: sessionInfo.user_dessert,
+          user_soft: sessionInfo.user_soft,
         },
         {
           headers: {
@@ -187,11 +140,9 @@ export default function UpdateFullSession({ data }) {
       )
       .then(function handleResponse() {
         navigate("/");
+        setOpenModalUpdateSession(false);
       });
   };
-
-  // eslint-disable-next-line no-restricted-syntax
-  console.log(sessionInfo);
   return isLoading ? (
     <p>loading</p>
   ) : (
@@ -260,11 +211,9 @@ export default function UpdateFullSession({ data }) {
           <div>Gestion du repas</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
-              sessionInfo={sessionInfo}
-              selectedDuration={sessionInfo.duration}
-              handleMeal={handleMeal}
+              handleChange={handleMeal}
               data={users}
-              placeHolder={mealDealerName}
+              placeHolder={placeHolderMeal}
             />
           </div>
         </div>
@@ -283,9 +232,9 @@ export default function UpdateFullSession({ data }) {
           <div>Le dessert :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
+              handleChange={handleDessert}
               data={users}
-              setSelectedElement={setDessertDealer}
-              placeHolder={dessertDealerName}
+              placeHolder={placeHolderDessert}
             />
           </div>
         </div>
@@ -293,9 +242,9 @@ export default function UpdateFullSession({ data }) {
           <div>L'apéro :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
+              handleChange={handleApero}
               data={users}
-              setSelectedElement={setAperoDealer}
-              placeHolder={aperoDealerName}
+              placeHolder={placeHolderApero}
             />
           </div>
         </div>
@@ -303,9 +252,9 @@ export default function UpdateFullSession({ data }) {
           <div>Le sucré :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
+              handleChange={handleSweet}
               data={users}
-              setSelectedElement={setSweetDealer}
-              placeHolder={sweetDealerName}
+              placeHolder={placeHolderSweet}
             />
           </div>
         </div>
@@ -313,9 +262,9 @@ export default function UpdateFullSession({ data }) {
           <div>Le sans alcool :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
+              handleChange={handleSoft}
               data={users}
-              setSelectedElement={setSoftDealer}
-              placeHolder={softDealerName}
+              placeHolder={placeHolderSoft}
             />
           </div>
         </div>
@@ -323,9 +272,9 @@ export default function UpdateFullSession({ data }) {
           <div>La bière et le vin :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
+              handleChange={handleAlcool}
               data={users}
-              setSelectedElement={setAlcoolDealer}
-              placeHolder={alcoolDealerName}
+              placeHolder={placeHolderAlcool}
             />
           </div>
         </div>

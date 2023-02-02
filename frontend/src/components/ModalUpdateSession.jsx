@@ -50,7 +50,10 @@ function ModalUpdateSession({
           >
             <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 max-w-5/6">
               <div className="sm:flex sm:items-start">
-                <UpdateSessionFull data={data} />
+                <UpdateSessionFull
+                  data={data}
+                  setOpenModalUpdateSession={setOpenModalUpdateSession}
+                />
               </div>
               <div className="mt-6 flex justify-end">
                 <button

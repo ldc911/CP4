@@ -7,17 +7,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example({
-  sessionInfo,
-  data,
-  handleMeal,
-  placeHolder,
-}) {
+export default function Example({ data, handleChange, placeHolder }) {
   return (
-    <Listbox
-      value={sessionInfo.user_meal ? sessionInfo.user_meal : data.nickname}
-      onChange={handleMeal}
-    >
+    <Listbox value={placeHolder} onChange={handleChange}>
       {({ open }) => (
         <div className="mt-1 relative">
           <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">

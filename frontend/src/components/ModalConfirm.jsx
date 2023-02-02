@@ -6,12 +6,7 @@ import axios from "axios";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-export default function ModalConfirm({
-  data,
-  showDeleteModal,
-  handleClose,
-  query,
-}) {
+export default function ModalConfirm({ data, showDeleteModal, handleClose }) {
   const { id } = data;
   const cancelButtonRef = useRef(null);
 
