@@ -151,8 +151,8 @@ export default function UpdateFullSession({
     <p>loading</p>
   ) : (
     <form onSubmit={handleSubmit}>
-      <div className=" w-full h-full bg-white rounded-md py-6 px-2 m-4 shadow text-xs md:text-xl flex flex-col items-center">
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+      <div className=" w-full h-full bg-white rounded-md py-6 px-2 m-4 shadow text-xs md:text-base flex flex-col items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div className="text-center">Combien de temps ?</div>
           <div className="w-1/2 leading-4">
             <SelectMenuDurationUpdate
@@ -163,7 +163,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div className="text-center">Sera-ce une campagne ?</div>
           <div className="py-16">
             <Switch
@@ -189,7 +189,7 @@ export default function UpdateFullSession({
             </Switch>
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div className="text-center">Le titre ?</div>
           <div className="shadow-md leading-8">
             <input
@@ -200,7 +200,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div className="text-center">Et c'est où ?</div>
           <div className="shadow-md leading-8">
             <input
@@ -211,7 +211,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div>Gestion du repas</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -221,7 +221,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div className="text-center">Un peu de détails :</div>
           <div className="shadow-md leading-8">
             <input
@@ -232,7 +232,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div>Le dessert :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -242,7 +242,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div>L'apéro :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -252,7 +252,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div>Le sucré :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -262,7 +262,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center">
+        <div className="w-full px-4 flex flex-row justify-between items-center">
           <div>Le sans alcool :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -272,7 +272,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 flex flex-row justify-between items-center mb-3">
+        <div className="w-full px-4 flex flex-row justify-between items-center mb-3">
           <div>La bière et le vin :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate

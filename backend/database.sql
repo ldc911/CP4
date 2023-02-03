@@ -20,31 +20,31 @@ VALUES (
         "Hassess",
         "test@test.com",
         "Parcours d'Hassess,occultiste de niveau 5",
-        "https://random.imagecdn.app/800/300",
+        "https://picsum.photos/800/300",
         0
     ), (
         "Naälia et Tagadours",
         "test2@test.com",
         "Parcours d'une drakédie et d'une féral', magelame et ensroceleuse de niveau 5",
-        "https://random.imagecdn.app/800/300",
+        "https://picsum.photos/800/300",
         1
     ), (
         "Grodar",
         "test3@test.com",
         "Parcours de Grodar, barbare de niveau 5",
-        "https://random.imagecdn.app/800/300",
+        "https://picsum.photos/800/300",
         0
     ), (
         "Kaz et Smaja",
         "test4@test.com",
         "Parcours de Kaz et Smaja, assassin et prétresse de niveau 5",
-        "https://random.imagecdn.app/800/300",
+        "https://picsum.photos/800/300",
         0
     ), (
         "Divin",
         "test5@test.com",
         "Parcours de Divin, forgelier de niveau 5",
-        "https://random.imagecdn.app/800/300",
+        "https://picsum.photos/800/300",
         1
     );
 

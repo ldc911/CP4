@@ -34,7 +34,7 @@ export default function NavBar() {
             </div>
           )}
         </div>
-        <Popover className="fixed p-3 md:hidden">
+        <Popover className="fixed top-0 left-0 p-3 md:hidden">
           <Popover.Button>
             <Bars2Icon className="w-14 h-10 text-red-700" />
           </Popover.Button>
@@ -74,7 +74,7 @@ export default function NavBar() {
       </div>
       {location !== "/create" && (
         <Link to="/create">
-          <PlusCircleIcon className="fixed bottom-3 right-3 h-20 h-20 text-red-800" />
+          <PlusCircleIcon className="fixed bottom-3 right-3 w-20 h-20 text-red-800" />
         </Link>
       )}
       <main>

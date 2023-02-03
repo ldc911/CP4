@@ -45,7 +45,7 @@ export default function SessionList({
     setOpenModalUpdateSession(true);
   };
 
-  return (
+  return session.length !== 0 ? (
     <div className=" w-full bg-white rounded-md p-2 mb-4 shadow text-xs md:text-base ">
       <ModalUpdateSession
         openModalUpdateSession={openModalUpdateSession}
@@ -126,6 +126,13 @@ export default function SessionList({
           <span className="text-right font-medium"> {alcoolDealer}</span>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className=" w-full bg-white rounded-md p-2 mb-4 shadow text-xs md:text-base ">
+      <img
+        src="https://cdn.midjourney.com/5455fa1b-bc1b-4285-8b32-110599f42944/grid_0.png"
+        alt="No session"
+      />
     </div>
   );
 }
