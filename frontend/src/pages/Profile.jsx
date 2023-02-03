@@ -22,7 +22,7 @@ export default function Home() {
     <p>loading</p>
   ) : (
     <div className=" h-full w-screen p-4">
-      <ul className="flex flex-col gap-4 md:items-start md:flex-wrap  md:flex-row justify-center items-center">
+      <ul className="flex flex-col md:items-start md:flex-wrap md:justify-evenly md:flex-row justify-center items-center">
         {users.map((data) => (
           <li key={data.id}>
             <UserList user={data} />

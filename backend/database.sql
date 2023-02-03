@@ -25,7 +25,7 @@ VALUES (
     ), (
         "Naälia et Tagadours",
         "test2@test.com",
-        "Parcours d'une drakédie et d'une féral', magelame et ensroceleuse de niveau 5",
+        "Parcours d'une drakédie et d'une féral, magelame et ensorceleuse de niveau 5",
         "https://picsum.photos/800/300",
         1
     ), (
