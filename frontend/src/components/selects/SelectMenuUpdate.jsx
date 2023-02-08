@@ -12,7 +12,7 @@ export default function Example({ data, handleChange, placeHolder }) {
     <Listbox value={placeHolder} onChange={handleChange}>
       {({ open }) => (
         <div className="mt-1 relative">
-          <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-center cursor-default focus:outline-none focus:ring-1 focus:ring-gray-600 focus:border-gray-600 sm:text-sm">
             <span className="block truncate">{placeHolder}</span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <ChevronUpDownIcon
@@ -55,7 +55,7 @@ export default function Example({ data, handleChange, placeHolder }) {
                       {selected ? (
                         <span
                           className={classNames(
-                            active ? "text-white" : "text-indigo-600",
+                            active ? "text-white" : "text-red-700",
                             "absolute inset-y-0 left-0 flex items-center pl-1.5"
                           )}
                         >

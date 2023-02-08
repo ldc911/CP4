@@ -152,7 +152,7 @@ export default function UpdateFullSession({
   ) : (
     <form onSubmit={handleSubmit}>
       <div className=" w-full h-full bg-white rounded-md py-6 px-2 m-4 shadow text-xs md:text-base flex flex-col items-center">
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div className="text-center">Combien de temps ?</div>
           <div className="w-1/2 leading-4">
             <SelectMenuDurationUpdate
@@ -163,9 +163,9 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div className="text-center">Sera-ce une campagne ?</div>
-          <div className="py-16">
+          <div className="py-16 ">
             <Switch
               checked={isCampaignEnabled}
               onChange={() => {
@@ -176,42 +176,44 @@ export default function UpdateFullSession({
                 }
               }}
               className={`${isCampaignEnabled ? "bg-green-900" : "bg-red-900"}
-      relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
+      relative inline-flex items-center h-[19px] w-[37px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
               <span className="sr-only">Use setting</span>
               <span
                 aria-hidden="true"
                 className={`${
-                  isCampaignEnabled ? "translate-x-9" : "translate-x-0"
+                  isCampaignEnabled ? "translate-x-4" : "translate-x-0"
                 }
-        pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+        pointer-events-none inline-block align-middle  h-[17px] w-[17px] transform rounded-full bg-white ring-0 transition duration-200 ease-in-out`}
               />
             </Switch>
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div className="text-center">Le titre ?</div>
-          <div className="shadow-md leading-8">
+          <div className=" bg-white border border-gray-300 rounded shadow-sm  pl-4 pr-10 py-1 w-1/2 focus:border-gray-500">
             <input
               type="text"
               value={sessionInfo.title}
               onChange={handleChange}
               placeholder="Entre le titre de la session"
+              className="w-full"
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div className="text-center">Et c'est où ?</div>
-          <div className="shadow-md leading-8">
+          <div className=" bg-white border border-gray-300 rounded shadow-sm  pl-4 pr-10 py-1 w-1/2">
             <input
               type="text"
               value={sessionInfo.localisation}
               onChange={handleChangeLocation}
               placeholder="Entre le lieu de la session"
+              className="w-full"
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div>Gestion du repas</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -221,18 +223,19 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
-          <div className="text-center">Un peu de détails :</div>
-          <div className="shadow-md leading-8">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
+          <div className="text-center">Menu :</div>
+          <div className=" border border-gray-300 rounded shadow-sm  pl-4 pr-10 py-1 w-1/2 ">
             <input
               type="text"
               value={sessionInfo.details_meals}
               onChange={handleChangeMenu}
               placeholder="On mange quoi ?"
+              className="w-full"
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div>Le dessert :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -242,7 +245,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div>L'apéro :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -252,7 +255,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div>Le sucré :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -262,7 +265,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center">
+        <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div>Le sans alcool :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate
@@ -272,7 +275,7 @@ export default function UpdateFullSession({
             />
           </div>
         </div>
-        <div className="w-full px-4 flex flex-row justify-between items-center mb-3">
+        <div className="w-full h-10 px-4 flex flex-row justify-between items-center mb-3">
           <div>La bière et le vin :</div>
           <div className="w-1/2 leading-4">
             <SelectMenuUpdate

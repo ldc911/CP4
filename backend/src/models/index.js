@@ -39,11 +39,6 @@ const SessionManager = require("./SessionManager");
 models.session = new SessionManager();
 models.session.setDatabase(pool);
 
-const ItemManager = require("./ItemManager");
-
-models.item = new ItemManager();
-models.item.setDatabase(pool);
-
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 

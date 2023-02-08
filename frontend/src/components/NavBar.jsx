@@ -34,7 +34,7 @@ export default function NavBar() {
             </div>
           )}
         </div>
-        <Popover className="fixed top-0 left-0 p-3 md:hidden">
+        <Popover className="fixed top-0 left-0 p-3 md:hidden whitespace-nowrap">
           <Popover.Button>
             <Bars2Icon className="w-14 h-10 text-red-700" />
           </Popover.Button>
