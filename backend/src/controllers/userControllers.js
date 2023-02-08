@@ -31,11 +31,9 @@ const getOneUser = (req, res) => {
 const edit = (req, res) => {
   const item = req.body;
 
-  // TODO validations (length, format...)
-
   item.id = parseInt(req.params.id, 10);
 
-  models.item
+  models.user
     .update(item)
     .then(([result]) => {
       if (result.affectedresult === 0) {
@@ -50,15 +48,13 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
-  const item = req.body;
+const createUser = (req, res) => {
+  const user = req.body;
 
-  // TODO validations (length, format...)
-
-  models.item
-    .insert(item)
+  models.user
+    .insert(user)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      res.location(`/users/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,7 +63,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.item
+  models.user
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedresult === 0) {
@@ -86,6 +82,6 @@ module.exports = {
   getUser,
   getOneUser,
   edit,
-  add,
+  createUser,
   destroy,
 };

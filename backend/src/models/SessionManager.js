@@ -23,7 +23,7 @@ class SessionManager extends AbstractManager {
       user_soft,
     } = session;
     return this.database.query(
-      `insert into ${this.table} (
+      `INSERT INTO ${this.table} (
       dateSession,
       duration,
       localisation,
@@ -36,7 +36,7 @@ class SessionManager extends AbstractManager {
       user_sweets,
       user_dessert,
       user_soft
-  ) values (?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+  ) VALUES (?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         dateSession,
         duration,

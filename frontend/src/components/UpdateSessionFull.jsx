@@ -191,7 +191,7 @@ export default function UpdateFullSession({
         </div>
         <div className="w-full h-10 mb-1 px-4 flex flex-row justify-between items-center">
           <div className="text-center">Le titre ?</div>
-          <div className=" bg-white border border-gray-300 rounded shadow-sm  pl-4 pr-10 py-1 w-1/2">
+          <div className=" bg-white border border-gray-300 rounded shadow-sm  pl-4 pr-10 py-1 w-1/2 focus:border-gray-500">
             <input
               type="text"
               value={sessionInfo.title}

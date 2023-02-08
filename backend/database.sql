@@ -5,7 +5,9 @@ CREATE TABLE
         email VARCHAR(50) NOT NULL UNIQUE,
         bio TEXT,
         banPic VARCHAR(255),
-        isMJ TINYINT(1)
+        isMJ TINYINT(1),
+        avatar VARCHAR(255),
+        hashedPassword VARCHAR(255) NOT NULL
     ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
 INSERT INTO
@@ -14,38 +16,50 @@ INSERT INTO
         email,
         bio,
         banPic,
-        isMJ
+        isMJ,
+        avatar,
+        hashedPassword
     )
 VALUES (
         "Hassess",
         "test@test.com",
         "Parcours d'Hassess,occultiste de niveau 5",
         "https://picsum.photos/800/300",
-        0
+        0,
+        "",
+        "$argon2id$v=19$m=65536,t=5,p=1$yEsnwBnRhv95PCKJN073jg$jn6I4sX3ZEej0emtoOqQkzU7GwZF3ujGVMXTWoCHCMg"
     ), (
         "Naälia et Tagadours",
         "test2@test.com",
         "Parcours d'une drakédie et d'une féral, magelame et ensorceleuse de niveau 5",
         "https://picsum.photos/800/300",
-        1
+        1,
+        "",
+        "$argon2id$v=19$m=65536,t=5,p=1$yEsnwBnRhv95PCKJN073jg$jn6I4sX3ZEej0emtoOqQkzU7GwZF3ujGVMXTWoCHCMg"
     ), (
         "Grodar",
         "test3@test.com",
         "Parcours de Grodar, barbare de niveau 5",
         "https://picsum.photos/800/300",
-        0
+        0,
+        "",
+        "$argon2id$v=19$m=65536,t=5,p=1$yEsnwBnRhv95PCKJN073jg$jn6I4sX3ZEej0emtoOqQkzU7GwZF3ujGVMXTWoCHCMg"
     ), (
         "Kaz et Smaja",
         "test4@test.com",
         "Parcours de Kaz et Smaja, assassin et prétresse de niveau 5",
         "https://picsum.photos/800/300",
-        0
+        0,
+        "",
+        "$argon2id$v=19$m=65536,t=5,p=1$yEsnwBnRhv95PCKJN073jg$jn6I4sX3ZEej0emtoOqQkzU7GwZF3ujGVMXTWoCHCMg"
     ), (
         "Divin",
         "test5@test.com",
         "Parcours de Divin, forgelier de niveau 5",
         "https://picsum.photos/800/300",
-        1
+        1,
+        "",
+        "$argon2id$v=19$m=65536,t=5,p=1$yEsnwBnRhv95PCKJN073jg$jn6I4sX3ZEej0emtoOqQkzU7GwZF3ujGVMXTWoCHCMg"
     );
 
 CREATE TABLE

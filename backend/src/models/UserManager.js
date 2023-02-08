@@ -6,9 +6,11 @@ class UserManager extends AbstractManager {
   }
 
   insert(user) {
-    return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      user.title,
-    ]);
+    const { nickname, email, bio, banPic, isMJ, avatar, hashedPassword } = user;
+    return this.database.query(
+      `INSERT INTO ${this.table} (nickname, email, bio, banPic, isMJ, avatar, hashedPassword) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [nickname, email, bio, banPic, isMJ, avatar, hashedPassword]
+    );
   }
 
   update(user) {
@@ -16,6 +18,13 @@ class UserManager extends AbstractManager {
       `update ${this.table} set title = ? where id = ?`,
       [user.title, user.id]
     );
+  }
+
+  findByEmail(user) {
+    const { email } = user;
+    return this.database.query(`SELECT * FROM ${this.table} WHERE email = ?`, [
+      email,
+    ]);
   }
 }
 
