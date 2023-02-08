@@ -34,7 +34,9 @@ export default function Home() {
   ) : (
     <div className="h-full flex flex-col">
       <div className=" flex flex-col gap-4 p-3 md:grid md:grid-cols-2">
-        {session.length === 0 ? (
+        {session.filter((element) => {
+          return dateTransform(element.dateSession) >= today;
+        }).length === 0 ? (
           <div className=" w-full bg-white rounded-md p-2 mb-4 shadow text-xs md:text-base ">
             <img
               src="https://cdn.midjourney.com/5455fa1b-bc1b-4285-8b32-110599f42944/grid_0.png"
